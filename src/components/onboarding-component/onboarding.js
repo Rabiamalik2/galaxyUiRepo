@@ -1,4 +1,3 @@
-//import liraries
 import React, {Component, useRef, useState} from 'react';
 import {
   View,
@@ -44,7 +43,6 @@ const OnBoarding = () => {
           viewabilityConfig={viewConfig}
           ref={slidesRef}
         />
-        <Paginator data={slides} scrollX={scrollX} />
       </View>
     </SafeAreaView>
   );
@@ -52,3 +50,4 @@ const OnBoarding = () => {
 
 //make this component available to the app
 export default OnBoarding;
+//  <Paginator data={slides} scrollX={scrollX} />

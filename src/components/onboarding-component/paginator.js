@@ -27,12 +27,12 @@ export default function Paginator({data, scrollX}) {
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [10, 60, 10],
+          outputRange: [10, 10, 10],
           extrapolate: 'clamp',
         });
         const opacity = scrollX.interpolate({
           inputRange,
-          outputRange: [0.2, 1, 0.2],
+          outputRange: [0.5, 1, 0.5],
           extrapolate: 'clamp',
         });
 
