@@ -1,0 +1,46 @@
+export default slides = [
+  {
+    key: 's1',
+    text: 'We will learn all of the scientific disciplines that involve.',
+    title1: 'Virtual',
+    title2: 'Galaxy',
+    title3: 'Explorer',
+    image: require('../../assets/images/launchScreen.png'),
+    backgroundColor: '#20d2bb',
+  },
+  {
+    key: 's2',
+    title: 'Flight Booking',
+    text: 'Upto 25% off on Domestic Flights',
+    image: require('../../assets/images/overview.png'),
+    backgroundColor: '#febe29',
+  },
+  {
+    key: 's3',
+    title: 'Great Offers',
+    text: 'Enjoy Great offers on our all services',
+    image: require('../../assets/images/nebula.png'),
+    backgroundColor: '#22bcb5',
+  },
+  {
+    key: 's4',
+    title: 'Best Deals',
+    text: ' Best Deals on all our services',
+    image: require('../../assets/images/constellations.png'),
+    backgroundColor: '#3395ff',
+  },
+  {
+    key: 's5',
+    title: 'Bus Booking',
+    text: 'Enjoy Travelling on Bus with flat 100% off',
+    image: require('../../assets/images/spaceship.png'),
+    backgroundColor: '#f6437b',
+  },
+  //   {
+  //     key: 's6',
+  //     title: 'Train Booking',
+  //     text: ' 10% off on first Train booking',
+  //     image: require('../../assets/images/satelite.png'),
+  //     backgroundColor: '#febe29',
+  //   },
+];
