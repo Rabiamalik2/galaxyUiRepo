@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,17 +9,35 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import AppIntroSlider from 'react-native-app-intro-slider';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
-import Colors from '../../../services/constants/colors';
-import slides from '../../../components/data/slides';
-import OnBoarding from '../../../components/onboarding-component/onboarding';
 
 // create a component
 const HomeScreen = () => {
-  <View style={styles.container}>
-    <Text>HomeScreen</Text>
-  </View>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../../../assets/images/children.png')}
+        style={[styles.image, {resizeMode: 'cover'}]}>
+        <View style={styles.viewComp}>
+          <Text style={styles.textmain}>Let's float in</Text>
+          <Text style={styles.textUniverse}>Universe</Text>
+          <Text style={styles.textWelcome}>Welcome</Text>
+          <Text style={styles.textsub}>
+            Unlock a universe of{'\n'}knowledge and adventure{'\n'}with your
+            pass.
+          </Text>
+          <TouchableOpacity style={[styles.loginTo, {flexDirection: 'row'}]}>
+            <Text style={styles.loginText}>Log In</Text>
+            <AntDesign name="arrowright" style={styles.iconArrowright} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.newAccTo}>
+            <Text style={styles.newAccText}>Create new account</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
+  );
 };
 
 export default HomeScreen;

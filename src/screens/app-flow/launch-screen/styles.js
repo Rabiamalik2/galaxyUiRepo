@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(100),
     flex: 1,
+
+    // justifyContent: 'center',
   },
   viewComp: {
     marginHorizontal: responsiveHeight(4),

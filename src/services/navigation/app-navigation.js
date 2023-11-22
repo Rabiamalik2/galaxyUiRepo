@@ -15,6 +15,10 @@ const AppNavigation = () => {
         component={AppRoutes.WelcomeScreen}
       />
       <Stack.Screen
+        name={appRoutes.launchScreen}
+        component={AppRoutes.LaunchScreen}
+      />
+      <Stack.Screen
         name={appRoutes.homeScreen}
         component={AppRoutes.HomeScreen}
       />
