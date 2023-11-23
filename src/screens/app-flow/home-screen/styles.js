@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.PoppinsBold,
   },
   iconArrowright: {
-    marginLeft: responsiveHeight(1),
+    marginLeft: responsiveHeight(2),
     marginTop: responsiveHeight(-0.2),
     fontSize: responsiveFontSize(2),
     color: Colors.black,
@@ -79,6 +79,15 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     fontFamily: Fonts.PoppinsMedium,
     textDecorationLine: 'underline',
+  },
+  backgroundVideo: {
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    // alignItems: 'stretch',
+    bottom: 0,
+    right: 0,
   },
 });
 export default styles;

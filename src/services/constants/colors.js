@@ -18,7 +18,7 @@ const Colors = {
   darkGrey1: '#5A5A5A',
   yellow: '#FFA400',
   black: '#000000',
-  transparent: 'rgba(0,0,0,0.5)',
+  transparent: '#c9cccf',
   grey2: '#708090',
   grey3: '#545a5f',
 };

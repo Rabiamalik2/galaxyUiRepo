@@ -19,9 +19,11 @@ import {
 import Fonts from '../../../services/constants/fonts';
 import styles from './styles';
 import OnBoarding from '../../../components/onboarding-component/onboarding';
+import {useNavigation, useRoute} from '@react-navigation/native';
 // create a component
 const LaunchScreen = () => {
   const [show, setShow] = useState(false);
+  const navigation = useNavigation();
   const onButtonClick = () => {
     setShow(true);
   };

@@ -1,17 +1,5 @@
 //import liraries
 import React, {Component, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import styles from './styles';
-import OnBoarding from '../../../components/onboarding-component/onboarding';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeScreen from '../home-screen';
 import LaunchScreen from '../launch-screen';
