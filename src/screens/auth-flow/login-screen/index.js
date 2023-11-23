@@ -24,6 +24,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../../components/button-component';
 import BottomText from '../../../components/term';
 import GoBack from '../../../components/buttonGoBack';
+import VideoBackground from '../../../components/videoBackground';
 // create a component
 const LoginScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -35,50 +36,47 @@ const LoginScreen = () => {
       keyboardShouldPersistTaps="handled"
       extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
-        <ImageBackground
-          source={require('../../../assets/images/space.png')}
-          style={[styles.image, {resizeMode: 'cover'}]}>
-          <View style={styles.viewComp}>
-            <GoBack />
-            <Text style={styles.textmain}>Welcome</Text>
-            <Text style={styles.textUniverse}>Back</Text>
-            <View style={{marginTop: responsiveHeight(20)}}>
-              <Input
-                placeholder="Email Address"
-                Icon={<MaterialIcons name="email" style={styles.icon1S} />}
-              />
-              <Input
-                placeholder="Password"
-                secureTextEntry={hidePassword}
-                Icon={
-                  <MaterialIcons
-                    onPress={() => {
-                      setHidePassword(!hidePassword);
-                    }}
-                    name={hidePassword ? 'lock-open' : 'lock-outline'}
-                    style={styles.icon1S}
-                  />
-                }
-              />
-            </View>
-            <Button
-              title={'Log In'}
-              onPress={() =>
-                navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                  screen: RouteNames.authRoutes.loginScreen,
-                })
-              }
+        <VideoBackground source={require('../../../assets/images/vid2.mp4')} />
+        <View style={styles.viewComp}>
+          <GoBack />
+          <Text style={styles.textmain}>Welcome</Text>
+          <Text style={styles.textUniverse}>Back</Text>
+          <View style={{marginTop: responsiveHeight(20)}}>
+            <Input
+              placeholder="Email Address"
+              Icon={<MaterialIcons name="email" style={styles.icon1S} />}
             />
-            <BottomText
-              title={'Forgot Password?'}
-              onPress={() =>
-                navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                  screen: RouteNames.authRoutes.signUpScreen,
-                })
+            <Input
+              placeholder="Password"
+              secureTextEntry={hidePassword}
+              Icon={
+                <MaterialIcons
+                  onPress={() => {
+                    setHidePassword(!hidePassword);
+                  }}
+                  name={hidePassword ? 'lock-open' : 'lock-outline'}
+                  style={styles.icon1S}
+                />
               }
             />
           </View>
-        </ImageBackground>
+          <Button
+            title={'Log In'}
+            onPress={() =>
+              navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+                screen: RouteNames.authRoutes.loginScreen,
+              })
+            }
+          />
+          <BottomText
+            title={'Forgot Password?'}
+            onPress={() =>
+              navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+                screen: RouteNames.authRoutes.signUpScreen,
+              })
+            }
+          />
+        </View>
       </SafeAreaView>
     </KeyboardAwareScrollView>
   );

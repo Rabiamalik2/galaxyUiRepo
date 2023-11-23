@@ -1,15 +1,8 @@
 //import liraries
 import React, {Component, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {View, Text, SafeAreaView} from 'react-native';
 import styles from './styles';
-import Video from 'react-native-video';
+import VideoBackground from '../../../components/videoBackground';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Button from '../../../components/button-component';
 import BottomText from '../../../components/term';
@@ -19,15 +12,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <Video
-        source={require('../../../assets/images/vid1.mp4')}
-        style={styles.backgroundVideo}
-        muted={true}
-        repeat={true}
-        resizeMode={'cover'}
-        rate={1.0}
-        ignoreSilentSwitch={'obey'}
-      />
+      <VideoBackground source={require('../../../assets/images/vid1.mp4')} />
       <View style={styles.viewComp}>
         <Text style={styles.textmain}>Let's float in</Text>
         <Text style={styles.textUniverse}>Universe</Text>

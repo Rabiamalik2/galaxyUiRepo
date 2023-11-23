@@ -26,6 +26,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Button from '../../../components/button-component';
 import BottomText from '../../../components/term';
 import GoBack from '../../../components/buttonGoBack';
+import VideoBackground from '../../../components/videoBackground';
 // create a component
 const RegistrationScreen = () => {
   const navigation = useNavigation();
@@ -37,55 +38,53 @@ const RegistrationScreen = () => {
       keyboardShouldPersistTaps="handled"
       extraScrollHeight={50}>
       <SafeAreaView style={styles.container}>
-        <ImageBackground
-          source={require('../../../assets/images/space.png')}
-          style={[styles.image, {resizeMode: 'cover'}]}>
-          <View style={styles.viewComp}>
-            <GoBack />
-            <Text style={styles.textmain}>Let's</Text>
-            <Text style={styles.textUniverse}>Start</Text>
-            <View style={{marginTop: responsiveHeight(20)}}>
-              <Input
-                placeholder="Your Name"
-                Icon={<FontAwesome name="user" style={styles.icon1S} />}
-              />
+        <VideoBackground source={require('../../../assets/images/vid2.mp4')} />
 
-              <Input
-                placeholder="Email Address"
-                Icon={<MaterialIcons name="email" style={styles.icon1S} />}
-              />
-              <Input
-                placeholder="Password"
-                secureTextEntry={hidePassword}
-                Icon={
-                  <MaterialIcons
-                    onPress={() => {
-                      setHidePassword(!hidePassword);
-                    }}
-                    name={hidePassword ? 'lock-open' : 'lock-outline'}
-                    style={styles.icon1S}
-                  />
-                }
-              />
-            </View>
-            <Button
-              title={'Sign Up'}
-              onPress={() =>
-                navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                  screen: RouteNames.authRoutes.loginScreen,
-                })
-              }
+        <View style={styles.viewComp}>
+          <GoBack />
+          <Text style={styles.textmain}>Let's</Text>
+          <Text style={styles.textUniverse}>Start</Text>
+          <View style={{marginTop: responsiveHeight(20)}}>
+            <Input
+              placeholder="Your Name"
+              Icon={<FontAwesome name="user" style={styles.icon1S} />}
             />
-            <BottomText
-              title={'Terms and conditions'}
-              onPress={() =>
-                navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                  screen: RouteNames.authRoutes.signUpScreen,
-                })
+
+            <Input
+              placeholder="Email Address"
+              Icon={<MaterialIcons name="email" style={styles.icon1S} />}
+            />
+            <Input
+              placeholder="Password"
+              secureTextEntry={hidePassword}
+              Icon={
+                <MaterialIcons
+                  onPress={() => {
+                    setHidePassword(!hidePassword);
+                  }}
+                  name={hidePassword ? 'lock-open' : 'lock-outline'}
+                  style={styles.icon1S}
+                />
               }
             />
           </View>
-        </ImageBackground>
+          <Button
+            title={'Sign Up'}
+            onPress={() =>
+              navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+                screen: RouteNames.authRoutes.loginScreen,
+              })
+            }
+          />
+          <BottomText
+            title={'Terms and conditions'}
+            onPress={() =>
+              navigation.navigate(RouteNames.navigatorNames.authNavigator, {
+                screen: RouteNames.authRoutes.signUpScreen,
+              })
+            }
+          />
+        </View>
       </SafeAreaView>
     </KeyboardAwareScrollView>
   );
