@@ -6,12 +6,10 @@ import {
   ImageBackground,
   TouchableOpacity,
   SafeAreaView,
-  TextInput,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+
 import styles from './styles';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import RouteNames from '../../../services/constants/route-names';
 import Colors from '../../../services/constants/colors';
 import {
@@ -22,8 +20,13 @@ import {
 import Fonts from '../../../services/constants/fonts';
 import Input from '../../../components/Text-input-component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Button from '../../../components/button-component';
+import BottomText from '../../../components/term';
+import GoBack from '../../../components/buttonGoBack';
 // create a component
 const LoginScreen = () => {
+  const [hidePassword, setHidePassword] = useState(true);
   const navigation = useNavigation();
   return (
     <KeyboardAwareScrollView
@@ -36,52 +39,44 @@ const LoginScreen = () => {
           source={require('../../../assets/images/space.png')}
           style={[styles.image, {resizeMode: 'cover'}]}>
           <View style={styles.viewComp}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.transparent,
-                height: responsiveHeight(5),
-                width: responsiveWidth(23),
-                borderRadius: responsiveWidth(2),
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: 0.5,
-              }}>
-              <FontAwesome
-                name="long-arrow-left"
-                style={{
-                  // marginLeft: responsiveHeight(1),
-                  // marginTop: responsiveHeight(0.1),
-                  fontSize: responsiveFontSize(3.3),
-                  color: Colors.white,
-                  fontFamily: Fonts.PoppinsExtraBold,
-                }}
-              />
-            </TouchableOpacity>
+            <GoBack />
             <Text style={styles.textmain}>Welcome</Text>
             <Text style={styles.textUniverse}>Back</Text>
             <View style={{marginTop: responsiveHeight(20)}}>
-              <Input placeholder="Email Address" email />
-              <Input placeholder="Password" password />
+              <Input
+                placeholder="Email Address"
+                Icon={<MaterialIcons name="email" style={styles.icon1S} />}
+              />
+              <Input
+                placeholder="Password"
+                secureTextEntry={hidePassword}
+                Icon={
+                  <MaterialIcons
+                    onPress={() => {
+                      setHidePassword(!hidePassword);
+                    }}
+                    name={hidePassword ? 'lock-open' : 'lock-outline'}
+                    style={styles.icon1S}
+                  />
+                }
+              />
             </View>
-            <TouchableOpacity
-              style={[styles.loginTo, {flexDirection: 'row'}]}
+            <Button
+              title={'Log In'}
               onPress={() =>
                 navigation.navigate(RouteNames.navigatorNames.authNavigator, {
                   screen: RouteNames.authRoutes.loginScreen,
                 })
-              }>
-              <Text style={styles.loginText}>Log In</Text>
-              <AntDesign name="arrowright" style={styles.iconArrowright} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.forgotPassTo}
+              }
+            />
+            <BottomText
+              title={'Forgot Password?'}
               onPress={() =>
                 navigation.navigate(RouteNames.navigatorNames.authNavigator, {
                   screen: RouteNames.authRoutes.signUpScreen,
                 })
-              }>
-              <Text style={styles.forgotPassText}>Forgot Password?</Text>
-            </TouchableOpacity>
+              }
+            />
           </View>
         </ImageBackground>
       </SafeAreaView>

@@ -27,7 +27,8 @@ const Input = React.forwardRef(
     props,
     ref,
   ) => {
-    const [hidePassword, setHidePassword] = useState(props.password);
+    const {Icon} = props;
+    console.log('icon', Icon);
     return (
       <View style={styles.inpMainView}>
         <View style={styles.txtinpView}>
@@ -38,7 +39,7 @@ const Input = React.forwardRef(
             onSubmitEditing={props.onSubmitEditting}
             returnKeyType={props.returnKeyType}
             onChangeText={props.onChangeText}
-            secureTextEntry={hidePassword}
+            secureTextEntry={props.secureTextEntry}
             placeholder={props.placeholder}
             placeholderTextColor="white"
             keyboardType={props.keyboardType}
@@ -46,17 +47,7 @@ const Input = React.forwardRef(
             editable={props.editable}
             style={[styles.textiS, props.style]}
           />
-          {props.password && (
-            <MaterialIcons
-              onPress={() => {
-                setHidePassword(!hidePassword);
-              }}
-              name={hidePassword ? 'lock-open' : 'lock-outline'}
-              style={styles.icon1S}
-            />
-          )}
-          {props.email && <MaterialIcons name="email" style={styles.icon1S} />}
-          {props.name && <FontAwesome name="user" style={styles.icon1S} />}
+          {Icon && Icon}
         </View>
       </View>
     );

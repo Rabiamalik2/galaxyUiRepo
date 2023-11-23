@@ -69,5 +69,10 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.PoppinsMedium,
     textDecorationLine: 'underline',
   },
+  icon1S: {
+    left: -40,
+    fontSize: responsiveFontSize(2.5),
+    color: Colors.lightGrey,
+  },
 });
 export default styles;

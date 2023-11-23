@@ -13,6 +13,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import RouteNames from '../../../services/constants/route-names';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../../services/constants/colors';
 import {
   responsiveHeight,
@@ -22,9 +23,13 @@ import {
 import Fonts from '../../../services/constants/fonts';
 import Input from '../../../components/Text-input-component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Button from '../../../components/button-component';
+import BottomText from '../../../components/term';
+import GoBack from '../../../components/buttonGoBack';
 // create a component
 const RegistrationScreen = () => {
   const navigation = useNavigation();
+  const [hidePassword, setHidePassword] = useState(true);
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -36,53 +41,49 @@ const RegistrationScreen = () => {
           source={require('../../../assets/images/space.png')}
           style={[styles.image, {resizeMode: 'cover'}]}>
           <View style={styles.viewComp}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: Colors.transparent,
-                height: responsiveHeight(5),
-                width: responsiveWidth(23),
-                borderRadius: responsiveWidth(2),
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: 0.5,
-              }}>
-              <FontAwesome
-                name="long-arrow-left"
-                style={{
-                  // marginLeft: responsiveHeight(1),
-                  // marginTop: responsiveHeight(0.1),
-                  fontSize: responsiveFontSize(3.3),
-                  color: Colors.white,
-                  fontFamily: Fonts.PoppinsExtraBold,
-                }}
-              />
-            </TouchableOpacity>
+            <GoBack />
             <Text style={styles.textmain}>Let's</Text>
             <Text style={styles.textUniverse}>Start</Text>
             <View style={{marginTop: responsiveHeight(20)}}>
-              <Input placeholder="Your Name" name />
-              <Input placeholder="Email Address" email />
-              <Input placeholder="Password" password />
+              <Input
+                placeholder="Your Name"
+                Icon={<FontAwesome name="user" style={styles.icon1S} />}
+              />
+
+              <Input
+                placeholder="Email Address"
+                Icon={<MaterialIcons name="email" style={styles.icon1S} />}
+              />
+              <Input
+                placeholder="Password"
+                secureTextEntry={hidePassword}
+                Icon={
+                  <MaterialIcons
+                    onPress={() => {
+                      setHidePassword(!hidePassword);
+                    }}
+                    name={hidePassword ? 'lock-open' : 'lock-outline'}
+                    style={styles.icon1S}
+                  />
+                }
+              />
             </View>
-            <TouchableOpacity
-              style={[styles.loginTo, {flexDirection: 'row'}]}
+            <Button
+              title={'Sign Up'}
               onPress={() =>
                 navigation.navigate(RouteNames.navigatorNames.authNavigator, {
                   screen: RouteNames.authRoutes.loginScreen,
                 })
-              }>
-              <Text style={styles.loginText}>Sign Up</Text>
-              <AntDesign name="arrowright" style={styles.iconArrowright} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.forgotPassTo}
+              }
+            />
+            <BottomText
+              title={'Terms and conditions'}
               onPress={() =>
                 navigation.navigate(RouteNames.navigatorNames.authNavigator, {
                   screen: RouteNames.authRoutes.signUpScreen,
                 })
-              }>
-              <Text style={styles.forgotPassText}>Terms and conditions</Text>
-            </TouchableOpacity>
+              }
+            />
           </View>
         </ImageBackground>
       </SafeAreaView>

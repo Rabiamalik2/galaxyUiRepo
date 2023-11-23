@@ -11,6 +11,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import Video from 'react-native-video';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import Button from '../../../components/button-component';
+import BottomText from '../../../components/term';
 import RouteNames from '../../../services/constants/route-names';
 // create a component
 const HomeScreen = () => {
@@ -33,25 +35,22 @@ const HomeScreen = () => {
         <Text style={styles.textsub}>
           Unlock a universe of{'\n'}knowledge and adventure{'\n'}with your pass.
         </Text>
-        <TouchableOpacity
-          style={[styles.loginTo, {flexDirection: 'row'}]}
+        <Button
+          title={'Log In'}
           onPress={() =>
             navigation.navigate(RouteNames.navigatorNames.authNavigator, {
               screen: RouteNames.authRoutes.loginScreen,
             })
-          }>
-          <Text style={styles.loginText}>Log In</Text>
-          <AntDesign name="arrowright" style={styles.iconArrowright} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.newAccTo}
+          }
+        />
+        <BottomText
+          title={'Create new account'}
           onPress={() =>
             navigation.navigate(RouteNames.navigatorNames.authNavigator, {
               screen: RouteNames.authRoutes.signUpScreen,
             })
-          }>
-          <Text style={styles.newAccText}>Create new account</Text>
-        </TouchableOpacity>
+          }
+        />
       </View>
     </SafeAreaView>
   );
