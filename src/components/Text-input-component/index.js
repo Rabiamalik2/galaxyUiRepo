@@ -5,8 +5,6 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import React, {useState} from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../services/constants/colors';
 
 const Input = React.forwardRef(
@@ -28,7 +26,7 @@ const Input = React.forwardRef(
     ref,
   ) => {
     const {Icon} = props;
-    console.log('icon', Icon);
+    // console.log('icon', Icon);
     return (
       <View style={styles.inpMainView}>
         <View style={styles.txtinpView}>

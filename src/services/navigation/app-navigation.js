@@ -22,6 +22,10 @@ const AppNavigation = () => {
         name={appRoutes.homeScreen}
         component={AppRoutes.HomeScreen}
       />
+      <Stack.Screen
+        name={appRoutes.dashboardScreen}
+        component={AppRoutes.DashboardScreen}
+      />
     </Stack.Navigator>
   );
 };

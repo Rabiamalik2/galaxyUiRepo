@@ -9,6 +9,7 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fonts from '../services/constants/fonts';
 import {useNavigation} from '@react-navigation/native';
+import RouteNames from '../services/constants/route-names';
 const GoBack = () => {
   const navigation = useNavigation();
   return (
@@ -22,7 +23,11 @@ const GoBack = () => {
         justifyContent: 'center',
         opacity: 0.5,
       }}
-      onPress={() => navigation.goBack()}>
+      onPress={() =>
+        navigation.navigate(RouteNames.navigatorNames.appNavigator, {
+          screen: RouteNames.appRoutes.welcomeScreen,
+        })
+      }>
       <FontAwesome
         name="long-arrow-left"
         style={{

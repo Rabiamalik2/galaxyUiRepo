@@ -1,17 +1,10 @@
 //import liraries
-import React, {Component, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {View, Text, SafeAreaView, Alert} from 'react-native';
 
 import styles from './styles';
-import {useNavigation} from '@react-navigation/native';
 import RouteNames from '../../../services/constants/route-names';
-import Colors from '../../../services/constants/colors';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -25,10 +18,57 @@ import Button from '../../../components/button-component';
 import BottomText from '../../../components/term';
 import GoBack from '../../../components/buttonGoBack';
 import VideoBackground from '../../../components/videoBackground';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SQLite from 'react-native-sqlite-2';
 // create a component
+const db = SQLite.openDatabase('userDatabase.db', '1.0', '', 1);
 const LoginScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [userList, setUserList] = useState([]);
+  console.log('myuser:', userList);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const isUser = async () => {
+    const user = userList.find(
+      item => item.email == email && item.password == password,
+    );
+    if (user) {
+      const key = 'isUser';
+      await AsyncStorage.setItem(key, JSON.stringify(user));
+      Alert.alert(
+        'Success',
+        'Email and password are matching!',
+        [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(RouteNames.navigatorNames.appNavigator, {
+                screen: RouteNames.appRoutes.dashboardScreen,
+              }),
+          },
+        ],
+        {cancelable: false},
+      );
+
+      // const user = ;
+      // console.log('user: ', user);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, [isFocused]);
+  const getData = () => {
+    db.transaction(tx => {
+      tx.executeSql('SELECT * FROM table_user', [], (tx, results) => {
+        var temp = [];
+        for (let i = 0; i < results.rows.length; ++i)
+          temp.push(results.rows.item(i));
+        setUserList(temp);
+      });
+    });
+  };
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -45,10 +85,14 @@ const LoginScreen = () => {
             <Input
               placeholder="Email Address"
               Icon={<MaterialIcons name="email" style={styles.icon1S} />}
+              value={email}
+              onChangeText={txt => setEmail(txt)}
             />
             <Input
               placeholder="Password"
               secureTextEntry={hidePassword}
+              value={password}
+              onChangeText={txt => setPassword(txt)}
               Icon={
                 <MaterialIcons
                   onPress={() => {
@@ -60,14 +104,7 @@ const LoginScreen = () => {
               }
             />
           </View>
-          <Button
-            title={'Log In'}
-            onPress={() =>
-              navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                screen: RouteNames.authRoutes.loginScreen,
-              })
-            }
-          />
+          <Button title={'Log In'} onPress={isUser} />
           <BottomText
             title={'Forgot Password?'}
             onPress={() =>

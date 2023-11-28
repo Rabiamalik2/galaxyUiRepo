@@ -18,6 +18,10 @@ const AuthNavigation = () => {
         name={authRoutes.signUpScreen}
         component={AuthRoutes.RegistrationScreen}
       />
+      <Stack.Screen
+        name={authRoutes.updateUserScreen}
+        component={AuthRoutes.UpdateUserScreen}
+      />
     </Stack.Navigator>
   );
 };

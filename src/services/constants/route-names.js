@@ -11,11 +11,13 @@ const RouteNames = {
     launchScreen: 'launchScreen',
     // App Routes
     homeScreen: 'homeScreen',
+    dashboardScreen: 'dashboardScreen',
   },
   authRoutes: {
     // Auth Screens
     loginScreen: 'loginScreen',
     signUpScreen: 'signUpScreen',
+    updateUserScreen: 'updateUserScreen',
   },
 };
 export default RouteNames;

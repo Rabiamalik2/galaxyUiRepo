@@ -20,71 +20,65 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import Fonts from '../../../services/constants/fonts';
 import Input from '../../../components/Text-input-component';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Button from '../../../components/button-component';
-import BottomText from '../../../components/term';
-import GoBack from '../../../components/buttonGoBack';
-import VideoBackground from '../../../components/videoBackground';
 import SQLite from 'react-native-sqlite-2';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // create a component
 const db = SQLite.openDatabase('userDatabase.db', '1.0', '', 1);
-const RegistrationScreen = () => {
+const UpdateUserScreen = () => {
   const navigation = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const saveUser = () => {
-    console.log(name, email, password);
-    db.transaction(function (tx) {
+  const setDetails = async () => {
+    const key = 'isUser';
+    const response = JSON.parse(await AsyncStorage.getItem(key));
+    setName(response.name);
+    setEmail(response.email);
+    setPassword(response.password);
+  };
+  const updateUser = async () => {
+    const key = 'isUser';
+    const response = JSON.parse(await AsyncStorage.getItem(key));
+    db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO table_user (name, email, password) VALUES (?,?,?)',
-        [name, email, password],
-        (tx, results) => {
+        'UPDATE table_user set name=?, email=? , password=? where user_id=?',
+        [name, email, password, response.user_id],
+        async (tx, results) => {
+          await AsyncStorage.setItem(
+            key,
+            JSON.stringify([name, email, password, response.user_id]),
+          );
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
               'Success',
-              'You are Registered Successfully',
+              'User updated successfully',
               [
                 {
                   text: 'Ok',
-                  onPress: () => navigation.navigate('loginScreen'),
+                  onPress: () =>
+                    navigation.navigate(
+                      RouteNames.navigatorNames.appNavigator,
+                      {
+                        screen: RouteNames.appRoutes.dashboardScreen,
+                      },
+                    ),
                 },
               ],
               {cancelable: false},
             );
-          } else Alert.alert('Registration Failed');
-        },
-        error => {
-          console.log('errere', error);
+          } else Alert.alert('Updation Failed');
         },
       );
     });
   };
   useEffect(() => {
-    db.transaction(txn => {
-      txn.executeSql(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='table_user'",
-        [],
-        (tx, res) => {
-          console.log('item:', res.rows.length);
-          if (res.rows.length == 0) {
-            txn.executeSql('DROP TABLE IF EXISTS table_user', []);
-            txn.executeSql(
-              'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), email VARCHAR(50), password VARCHAR(50))',
-              [],
-            );
-          }
-        },
-        error => {
-          console.log(error);
-        },
-      );
-    });
+    setDetails();
   }, []);
   return (
     <KeyboardAwareScrollView
@@ -97,7 +91,6 @@ const RegistrationScreen = () => {
           source={require('../../../assets/images/children.png')}
           style={styles.image}>
           <View style={styles.viewComp}>
-            <GoBack />
             <Text style={styles.textmain}>Let's</Text>
             <Text style={styles.textUniverse}>Start</Text>
             <View style={{marginTop: responsiveHeight(20)}}>
@@ -129,15 +122,7 @@ const RegistrationScreen = () => {
                 onChangeText={txt => setPassword(txt)}
               />
             </View>
-            <Button title={'Sign Up'} onPress={saveUser} />
-            <BottomText
-              title={'Terms and conditions'}
-              onPress={() =>
-                navigation.navigate(RouteNames.navigatorNames.authNavigator, {
-                  screen: RouteNames.authRoutes.signUpScreen,
-                })
-              }
-            />
+            <Button title={'Update User'} onPress={updateUser} />
           </View>
         </ImageBackground>
       </SafeAreaView>
@@ -146,4 +131,4 @@ const RegistrationScreen = () => {
 };
 
 //make this component available to the app
-export default RegistrationScreen;
+export default UpdateUserScreen;

@@ -33,3 +33,4 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
+//require('../../../assets/images/vid1.mp4')
